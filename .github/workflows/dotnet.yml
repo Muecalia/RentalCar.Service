@@ -26,7 +26,7 @@ jobs:
       run: dotnet restore ./RentalCar.Service.API/RentalCar.Service.API.csproj
       
     - name: Build API
-      run: dotnet build /RentalCar.Service.API/RentalCar.Service.API.csproj --no-restore
+      run: dotnet build ./RentalCar.Service.API/RentalCar.Service.API.csproj --no-restore
       
     #- name: Test
      # run: dotnet test --no-build --verbosity normal
