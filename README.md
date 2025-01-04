@@ -49,3 +49,6 @@ Microserviço para gestão dos serviços prestados pela loja de aluguer de carro
 
 <br/>
 
+# Migration
+dotnet ef migrations add FirstMigration --project RentalCar.Service.Infrastructure -o Persistence/Migrations -s RentalCar.Service.API
+dotnet ef database update --project RentalCar.Service.Infrastructure -s RentalCar.Service.API

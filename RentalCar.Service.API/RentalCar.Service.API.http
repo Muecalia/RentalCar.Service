@@ -1,0 +1,5 @@
+@RentalCar.Service.API_HostAddress = http://localhost:5099
+
+#Accept: application/json
+
+###
