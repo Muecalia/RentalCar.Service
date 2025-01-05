@@ -40,7 +40,7 @@ public class DeleteServiceHandlerTest
         result.Data.Should().NotBeNull();
         result.Message.Should().NotBeNullOrEmpty();
         result.Succeeded.Should().BeTrue();
-        result.Data.Date.Should().Be(DateTime.UtcNow.ToShortDateString());
+        result.Data.Date.Should().Be(services.DeletedAt?.ToShortDateString());
         
         repositoryMock.Verify(repo => repo.GetById(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
         repositoryMock.Verify(repo => repo.Delete(It.IsAny<Services>(), It.IsAny<CancellationToken>()), Times.Once);
