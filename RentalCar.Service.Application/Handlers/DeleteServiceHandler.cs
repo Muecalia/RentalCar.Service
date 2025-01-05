@@ -37,7 +37,7 @@ public class DeleteServiceHandler : IRequestHandler<DeleteServiceRequest, ApiRes
             }
 
             await _repository.Delete(service, cancellationToken);
-            var result = new InputServiceResponse(service.Id, service.Name, service.CreatedAt.ToShortDateString());
+            var result = new InputServiceResponse(service.Id, service.Name, service.DeletedAt?.ToShortDateString());
             //var result = new InputServiceResponse(Service.Id, Service.Name);
             _prometheusService.AddDeleteServiceCounter(StatusCodes.Status204NoContent.ToString());
             return ApiResponse<InputServiceResponse>.Success(result, MessageError.OperacaoSucesso(Objecto, Operacao));

@@ -15,14 +15,12 @@ public class CreateServiceHandler : IRequestHandler<CreateServiceRequest, ApiRes
     private readonly IServiceRepository _repository;
     private readonly ILoggerService _loggerService;
     private readonly IPrometheusService _prometheusService;
-    private readonly IRabbitMqService _rabbitMqService;
 
-    public CreateServiceHandler(IServiceRepository repository, ILoggerService loggerService, IPrometheusService prometheusService, IRabbitMqService rabbitMqService)
+    public CreateServiceHandler(IServiceRepository repository, ILoggerService loggerService, IPrometheusService prometheusService)
     {
         _repository = repository;
         _loggerService = loggerService;
         _prometheusService = prometheusService;
-        _rabbitMqService = rabbitMqService;
     }
 
     public async Task<ApiResponse<InputServiceResponse>> Handle(CreateServiceRequest request, CancellationToken cancellationToken)
