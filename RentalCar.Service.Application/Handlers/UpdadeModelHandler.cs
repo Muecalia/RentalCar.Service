@@ -14,14 +14,12 @@ public class UpdadeServiceHandler : IRequestHandler<UpdateServiceRequest, ApiRes
     private readonly IServiceRepository _repository;
     private readonly ILoggerService _loggerService;
     private readonly IPrometheusService _prometheusService;
-    private readonly IRabbitMqService _rabbitMqService;
 
-    public UpdadeServiceHandler(IServiceRepository repository, ILoggerService loggerService, IPrometheusService prometheusService, IRabbitMqService rabbitMqService)
+    public UpdadeServiceHandler(IServiceRepository repository, ILoggerService loggerService, IPrometheusService prometheusService)
     {
         _repository = repository;
         _loggerService = loggerService;
         _prometheusService = prometheusService;
-        _rabbitMqService = rabbitMqService;
     }
 
     public async Task<ApiResponse<InputServiceResponse>> Handle(UpdateServiceRequest request, CancellationToken cancellationToken)
@@ -44,7 +42,7 @@ public class UpdadeServiceHandler : IRequestHandler<UpdateServiceRequest, ApiRes
             await _repository.Update(service, cancellationToken);
             
             _prometheusService.AddUpdateServiceCounter(StatusCodes.Status200OK.ToString());
-            var result = new InputServiceResponse(service.Id, service.Name, service.CreatedAt.ToShortDateString());
+            var result = new InputServiceResponse(service.Id, service.Name, service.UpdatedAt?.ToShortDateString());
             return ApiResponse<InputServiceResponse>.Success(result, MessageError.OperacaoSucesso(Objecto, Operacao));
         }
         catch (Exception ex)
