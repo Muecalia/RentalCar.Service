@@ -24,9 +24,15 @@ jobs:
         
     - name: Restore dependencies API
       run: dotnet restore ./RentalCar.Service.API/RentalCar.Service.API.csproj
+
+    - name: Restore dependencies Tests
+      run: dotnet restore ./RentalCar.Service.UnitTest/RentalCar.Service.UnitTest.csproj
       
     - name: Build API
       run: dotnet build ./RentalCar.Service.API/RentalCar.Service.API.csproj --no-restore
+
+    - name: Build Unit Test
+      run: dotnet build ./RentalCar.Service.UnitTest/RentalCar.Service.UnitTest.csproj --no-restore
       
-    #- name: Test
-     # run: dotnet test --no-build --verbosity normal
+    - name: Unit Test
+      run: dotnet test ./RentalCar.Service.UnitTest/RentalCar.Service.UnitTest.csproj --no-build --verbosity normal
